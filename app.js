@@ -22,11 +22,11 @@ const
 var fs = require('fs');
 // var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
 // var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-var privateKey  = fs.readFileSync('/etc/letsencrypt/live/tinker.press/privkey.pem', 'utf8');
-var certificate = fs.readFileSync('/etc/letsencrypt/live/tinker.press/cert.pem', 'utf8');
+// var privateKey  = fs.readFileSync('/etc/letsencrypt/live/tinker.press/privkey.pem', 'utf8');
+// var certificate = fs.readFileSync('/etc/letsencrypt/live/tinker.press/cert.pem', 'utf8');
 // console.log(privateKey);
 // console.log(certificate);
-var credentials = {key: privateKey, cert: certificate};
+// var credentials = {key: privateKey, cert: certificate};
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -34,7 +34,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
-var httpsServer = https.createServer(credentials, app);
+// var httpsServer = https.createServer(credentials, app);
 
 /*
  * Be sure to setup your config values before running this code. You can 
@@ -847,11 +847,11 @@ function callSendAPI(messageData) {
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid 
 // certificate authority.
-// app.listen(app.get('port'), function() {
-//   console.log('Node app is running on port', app.get('port'));
-// });
-httpsServer.listen(app.get('port'), function() {
+app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+// httpsServer.listen(app.get('port'), function() {
+//   console.log('Node app is running on port', app.get('port'));
+// });
 module.exports = app;
 
